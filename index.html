@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#176a50">
+    <meta name="color-scheme" content="light">
+    <title>CampusRide | Driver</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <a class="brand" href="./index.html" aria-label="CampusRide home"><span class="brand-mark" aria-hidden="true">C<span>r</span></span>CampusRide<span class="brand-label">DRIVER</span></a>
+        <span class="campus">IIIT Dharwad</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy"><p class="eyebrow" id="date-label">YOUR DAILY DRIVE</p><h1 id="page-title">Ready when<br>you are.</h1><p class="intro-detail">A good journey starts here.</p></div>
+        <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=85" alt="A passenger bus ready for the road" width="800" height="600">
+      </section>
+
+      <section class="workspace" aria-labelledby="journey-title">
+        <div class="section-heading"><h2 id="journey-title">Your journey</h2><span class="status" id="status">Not started</span></div>
+        <form id="journey-form">
+          <fieldset id="selection-fields">
+            <legend class="sr-only">Journey details</legend>
+            <div class="field"><label for="driver">Driver name</label><select id="driver" name="driver" required><option value="">Select your name</option></select></div>
+            <div class="field"><label for="route">Route</label><select id="route" name="route" required><option value="">Select your route</option></select></div>
+            <div class="field"><label for="bus">Bus</label><select id="bus" name="bus" required><option value="">Select your bus</option></select></div>
+          </fieldset>
+
+          <div class="route-preview" id="route-preview" hidden>
+            <p class="eyebrow">THE ROUTE</p><ol id="stops"></ol>
+          </div>
+
+          <div class="journey-live" id="journey-live" hidden>
+            <span class="live-dot" aria-hidden="true"></span><div><p>Journey in progress</p><p class="started" id="started"></p></div><time id="elapsed" aria-label="Journey duration">00:00:00</time>
+          </div>
+          <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+          <button class="primary" id="journey-button" type="submit"><span id="journey-button-label">Start journey</span><span aria-hidden="true" id="journey-button-icon">&#8594;</span></button>
+        </form>
+      </section>
+
+      <section class="safety" aria-labelledby="safety-title"><div><h2 id="safety-title">Need urgent help?</h2><p>Emergency assistance</p></div><button class="sos" id="sos-button" type="button"><span aria-hidden="true">!</span> SOS</button></section>
+      <footer><span class="footer-dot" aria-hidden="true"></span>Device-only journey log<span class="footer-divider">/</span>Drive safe.</footer>
+    </main>
+
+    <dialog id="end-dialog" aria-labelledby="end-title"><div class="dialog-body"><p class="eyebrow">FINISH TRIP</p><h2 id="end-title">Reached your destination?</h2><p>End this journey and get ready for the next one.</p><div class="dialog-actions"><button class="secondary" id="keep-driving" type="button">Keep driving</button><button class="primary" id="confirm-end" type="button">End journey</button></div></div></dialog>
+    <dialog id="sos-dialog" aria-labelledby="sos-title"><div class="dialog-body"><span class="emergency-label">EMERGENCY</span><h2 id="sos-title">Help is one call away.</h2><p>Call India's emergency number, 112. No alert or location is sent to campus from this website.</p><dl id="emergency-details"></dl><a class="emergency-call" href="tel:112">Call 112 <span aria-hidden="true">&#8599;</span></a><button class="secondary full-width" id="close-sos" type="button">Close</button></div></dialog>
+  </body>
+</html>
