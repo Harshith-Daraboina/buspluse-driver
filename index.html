@@ -14,6 +14,7 @@
       <header class="header">
         <a class="brand" href="./index.html" aria-label="CampusRide home"><span class="brand-mark" aria-hidden="true">C<span>r</span></span>CampusRide<span class="brand-label">DRIVER</span></a>
         <span class="campus">IIIT Dharwad</span>
+        <button class="schedule-button" id="schedule-button" type="button">Schedule</button>
       </header>
 
       <section class="intro" aria-labelledby="page-title">
@@ -48,6 +49,7 @@
     </main>
 
     <dialog id="end-dialog" aria-labelledby="end-title"><div class="dialog-body"><p class="eyebrow">FINISH TRIP</p><h2 id="end-title">Reached your destination?</h2><p>End this journey and get ready for the next one.</p><div class="dialog-actions"><button class="secondary" id="keep-driving" type="button">Keep driving</button><button class="primary" id="confirm-end" type="button">End journey</button></div></div></dialog>
+    <dialog id="schedule-dialog" class="schedule-dialog" aria-labelledby="schedule-title"><div class="dialog-body"><p class="eyebrow">INSTITUTE TIMETABLE</p><h2 id="schedule-title">Bus schedule</h2><div class="field"><label for="schedule-bus">Show departures for</label><select id="schedule-bus"><option value="">All buses</option><option>Bus 1</option><option>Bus 2</option><option>Bus 3</option></select></div><ul class="schedule-list" id="schedule-list"></ul><button class="secondary full-width" id="close-schedule" type="button">Close</button></div></dialog>
     <dialog id="sos-dialog" aria-labelledby="sos-title"><div class="dialog-body"><span class="emergency-label">EMERGENCY</span><h2 id="sos-title">Help is one call away.</h2><p>Call India's emergency number, 112. No alert or location is sent to campus from this website.</p><dl id="emergency-details"></dl><a class="emergency-call" href="tel:112">Call 112 <span aria-hidden="true">&#8599;</span></a><button class="secondary full-width" id="close-sos" type="button">Close</button></div></dialog>
   </body>
 </html>

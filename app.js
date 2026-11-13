@@ -134,6 +134,60 @@ document.querySelector('#sos-button').addEventListener('click', () => {
   sosDialog.showModal();
 });
 document.querySelector('#close-sos').addEventListener('click', () => sosDialog.close());
+
+const C = 'Campus', T = 'Transit Hostel', S = 'Shivaji PG', M = 'Campus Mess';
+const schedule = [
+  ['07:30', C, T, [1, 2, 3]], ['07:45', T, M, [1]], ['08:00', T, M, [2, 3]], ['08:00', C, S, [1]], ['08:15', S, M, [1]],
+  ['08:30', C, S, [2]], ['08:45', S, M, [2]], ['09:15', C, S, [3]], ['09:30', S, C, [3]], ['09:30', C, T, [1, 2]],
+  ['10:00', T, C, [1, 2]], ['11:00', C, T, [2, 3]], ['11:30', T, C, [2, 3]], ['12:30', C, T, [1, 3]], ['13:00', T, C, [1, 3]],
+  'Lunch break',
+  ['14:30', C, T, [1, 2, 3]], ['15:00', T, C, [1, 2, 3]], ['15:30', C, T, [2]], ['16:00', T, C, [2]], ['16:15', C, T, [1]],
+  ['17:00', T, C, [1]], ['17:45', C, T, [2]], ['17:45', C, T, [3]], ['18:00', T, C, [2, 3]], ['19:00', C, T, [1, 2, 3]],
+  ['19:30', T, C, [1, 2, 3]], ['20:00', C, T, [1]], ['20:30', T, C, [1]], ['21:00', C, T, [2, 3]], ['21:30', C, T, [1]],
+  ['22:00', T, C, [1, 2, 3]],
+  'Dinner break',
+  ['23:00', C, T, [2, 3]], ['23:30', T, C, [2, 3]],
+];
+const scheduleDialog = document.querySelector('#schedule-dialog');
+const scheduleBus = document.querySelector('#schedule-bus');
+
+function clock(time) {
+  const [hour, minute] = time.split(':').map(Number);
+  return `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`;
+}
+
+function renderSchedule() {
+  const bus = scheduleBus.value ? Number(scheduleBus.value.slice(-1)) : 0;
+  document.querySelector('#schedule-list').replaceChildren(...schedule
+    .filter(entry => typeof entry === 'string' || !bus || entry[3].includes(bus))
+    .map(entry => {
+      const item = document.createElement('li');
+      if (typeof entry === 'string') {
+        item.className = 'schedule-break';
+        item.textContent = entry;
+        return item;
+      }
+      const [time, from, to, list] = entry;
+      item.className = from === C ? 'outbound' : 'inbound';
+      const when = document.createElement('strong');
+      when.textContent = clock(time);
+      const where = document.createElement('span');
+      where.textContent = `${from} \u2192 ${to}`;
+      const who = document.createElement('small');
+      who.textContent = list.map(number => `Bus ${number}`).join(', ');
+      item.append(when, where, who);
+      return item;
+    }));
+}
+
+document.querySelector('#schedule-button').addEventListener('click', () => {
+  const selected = buses.findIndex(item => item.id === busSelect.value);
+  scheduleBus.value = selected >= 0 && selected < 3 ? `Bus ${selected + 1}` : '';
+  renderSchedule();
+  scheduleDialog.showModal();
+});
+scheduleBus.addEventListener('change', renderSchedule);
+document.querySelector('#close-schedule').addEventListener('click', () => scheduleDialog.close());
 window.addEventListener('pageshow', () => { if (storageAvailable) updateTimer(); });
 setInterval(updateTimer, 1000);
 renderJourney();
